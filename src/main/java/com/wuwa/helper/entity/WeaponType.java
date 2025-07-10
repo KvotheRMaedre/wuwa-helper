@@ -8,8 +8,8 @@ import java.time.Instant;
 import java.util.UUID;
 
 @Entity
-@Table(name = "user")
-public class User {
+@Table(name = "weapon_type")
+public class WeaponType {
 
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
@@ -18,28 +18,20 @@ public class User {
     @Column(name = "name")
     private String name;
 
-    @Column(name = "email")
-    private String email;
-
-    @Column(name = "password")
-    private String password;
-
     @CreationTimestamp
     private Instant creationTimestamp;
 
     @UpdateTimestamp
     private Instant updatedTimestamp;
 
-    public User() {
+    public WeaponType() {
     }
 
-    public User(UUID id, String name, String email, String password, Instant creationTimestamp, Instant updatedTimestamp) {
+    public WeaponType(UUID id, String name, Instant creationTimestamp, Instant updateTimestamp) {
         this.id = id;
         this.name = name;
-        this.email = email;
-        this.password = password;
         this.creationTimestamp = creationTimestamp;
-        this.updatedTimestamp = updatedTimestamp;
+        this.updatedTimestamp = updateTimestamp;
     }
 
     public UUID getId() {
@@ -54,22 +46,6 @@ public class User {
         this.name = name;
     }
 
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
     public Instant getCreationTimestamp() {
         return creationTimestamp;
     }
@@ -82,7 +58,7 @@ public class User {
         return updatedTimestamp;
     }
 
-    public void setUpdatedTimestamp(Instant updatedTimestamp) {
-        this.updatedTimestamp = updatedTimestamp;
+    public void setUpdatedTimestamp(Instant updateTimestamp) {
+        this.updatedTimestamp = updateTimestamp;
     }
 }
