@@ -7,6 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.net.URI;
+import java.util.List;
 
 @RestController
 @RequestMapping("/v1/user")
@@ -31,8 +32,36 @@ public class UserController {
             return user.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
 
         } catch (IllegalArgumentException exception) {
-            return ResponseEntity.badRequest().build();
+            return ResponseEntity.notFound().build();
         }
     }
 
+    @GetMapping()
+    public ResponseEntity<List<User>> getAllUsers() {
+        var listUsers = userService.getAllUsers();
+        return ResponseEntity.ok(listUsers);
+    }
+
+    @DeleteMapping("{userId}")
+    public ResponseEntity<Void> deleteUserById(@PathVariable String userId){
+        try {
+            userService.deleteUserById(userId);
+            return ResponseEntity.noContent().build();
+        } catch (IllegalArgumentException exception) {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
+    @PutMapping("{userId}")
+    public ResponseEntity<User> updateUserById(@PathVariable String userId, @RequestBody UserDTO request){
+        try {
+            if(userService.userExists(userId)){
+                var user = userService.updateUserById(userId, request);
+                return ResponseEntity.ok(user);
+            }
+            return ResponseEntity.notFound().build();
+        } catch (IllegalArgumentException exception) {
+            return ResponseEntity.notFound().build();
+        }
+    }
 }
