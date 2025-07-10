@@ -19,7 +19,7 @@ public class WeaponTypeService {
 
     public UUID createWeaponType(WeaponTypeDTO weaponTypeDTO){
         var weaponType = new WeaponType(
-                UUID.randomUUID(),
+                null,
                 weaponTypeDTO.name(),
                 Instant.now(),
                 null
