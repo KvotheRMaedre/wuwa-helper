@@ -155,6 +155,7 @@ class UserServiceTest {
             assertNotNull(listUsers);
             assertEquals(1, listUsers.size());
         }
+
         @Test
         @DisplayName("Should return all users with success when theres more than 1 user")
         void shouldReturnAllUsersWithSuccessWhenTheresOnlyMoreThanOneUser(){
