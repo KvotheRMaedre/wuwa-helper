@@ -43,7 +43,9 @@ public class WeaponTypeService {
     }
 
     public void deleteWeaponTypeById(String weaponTypeId){
-        weaponTypeRepository.deleteById(UUID.fromString(weaponTypeId));
+        if(weaponTypeExists(weaponTypeId)){
+            weaponTypeRepository.deleteById(UUID.fromString(weaponTypeId));
+        }
     }
 
     public WeaponType updateWeaponType(String weaponTypeId, WeaponTypeDTO weaponTypeDTO){
