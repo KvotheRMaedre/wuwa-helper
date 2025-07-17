@@ -24,6 +24,9 @@ public class WeaponType {
     @UpdateTimestamp
     private Instant updatedTimestamp;
 
+    @OneToOne(mappedBy = "weaponType")
+    private Resonator resonator;
+
     public WeaponType() {
     }
 
