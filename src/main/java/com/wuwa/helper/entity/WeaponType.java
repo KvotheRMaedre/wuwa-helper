@@ -5,6 +5,7 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import java.time.Instant;
+import java.util.List;
 import java.util.UUID;
 
 @Entity
@@ -13,6 +14,7 @@ public class WeaponType {
 
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
+    @Column(name = "weapon_type_id")
     private UUID id;
 
     @Column(name = "name")
@@ -24,8 +26,8 @@ public class WeaponType {
     @UpdateTimestamp
     private Instant updatedTimestamp;
 
-    @OneToOne(mappedBy = "weaponType", cascade = CascadeType.ALL)
-    private Resonator resonator;
+    @OneToMany(mappedBy = "weaponType")
+    private List<Resonator> resonators;
 
     public WeaponType() {
     }

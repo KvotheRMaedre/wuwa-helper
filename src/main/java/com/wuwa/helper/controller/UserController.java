@@ -1,6 +1,8 @@
 package com.wuwa.helper.controller;
 
 import com.wuwa.helper.dto.UserDTO;
+import com.wuwa.helper.dto.UserResonatorDTO;
+import com.wuwa.helper.dto.UserResonatorResponseDTO;
 import com.wuwa.helper.entity.User;
 import com.wuwa.helper.services.UserService;
 import org.springframework.http.ResponseEntity;
@@ -63,5 +65,17 @@ public class UserController {
         } catch (IllegalArgumentException exception) {
             return ResponseEntity.notFound().build();
         }
+    }
+
+    @PostMapping("/{userId}/resonators")
+    public ResponseEntity<Void> associateResonator(@PathVariable("userId") String userId, @RequestBody UserResonatorDTO request){
+        userService.associateResonator(userId, request);
+        return ResponseEntity.ok().build();
+    }
+
+    @GetMapping("/{userId}/resonators")
+    public ResponseEntity<List<UserResonatorResponseDTO>> getAllAssociatedResonator(@PathVariable("userId") String userId){
+        var userResonators = userService.getAllResonators(userId);
+        return ResponseEntity.ok(userResonators);
     }
 }

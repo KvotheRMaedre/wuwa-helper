@@ -5,6 +5,7 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import java.time.Instant;
+import java.util.List;
 import java.util.UUID;
 
 @Entity
@@ -13,6 +14,7 @@ public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
+    @Column(name = "user_id")
     private UUID id;
 
     @Column(name = "name")
@@ -30,16 +32,20 @@ public class User {
     @UpdateTimestamp
     private Instant updatedTimestamp;
 
+    @OneToMany(mappedBy = "user")
+    private List<UserResonator> userResonators;
+
     public User() {
     }
 
-    public User(UUID id, String name, String email, String password, Instant creationTimestamp, Instant updatedTimestamp) {
+    public User(UUID id, String name, String email, String password, Instant creationTimestamp, Instant updatedTimestamp, List<UserResonator> userResonators) {
         this.id = id;
         this.name = name;
         this.email = email;
         this.password = password;
         this.creationTimestamp = creationTimestamp;
         this.updatedTimestamp = updatedTimestamp;
+        this.userResonators = userResonators;
     }
 
     public UUID getId() {
@@ -84,5 +90,13 @@ public class User {
 
     public void setUpdatedTimestamp(Instant updatedTimestamp) {
         this.updatedTimestamp = updatedTimestamp;
+    }
+
+    public List<UserResonator> getUserResonators() {
+        return userResonators;
+    }
+
+    public void setUserResonators(List<UserResonator> userResonators) {
+        this.userResonators = userResonators;
     }
 }
