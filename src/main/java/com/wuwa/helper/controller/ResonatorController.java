@@ -20,7 +20,6 @@ public class ResonatorController {
 
     @PostMapping
     public ResponseEntity<Resonator> createResonator(@RequestBody ResonatorDTO request){
-        System.out.println(request);
         var resonator = resonatorService.createResonator(request);
         return ResponseEntity.ok(resonator);
     }
