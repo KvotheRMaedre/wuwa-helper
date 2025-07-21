@@ -10,6 +10,7 @@ public class Resonator {
 
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
+    @Column(name = "resonator_id")
     private UUID resonatorId;
 
     @Column(name = "name")
@@ -21,8 +22,7 @@ public class Resonator {
     @Column(name = "region")
     private String region;
 
-    @ManyToOne(cascade = CascadeType.ALL)
-    @MapsId
+    @ManyToOne
     @JoinColumn(name = "weapon_type_id")
     private WeaponType weaponType;
 
