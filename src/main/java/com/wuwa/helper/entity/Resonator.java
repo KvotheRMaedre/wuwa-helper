@@ -21,7 +21,7 @@ public class Resonator {
     @Column(name = "region")
     private String region;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @MapsId
     @JoinColumn(name = "weapon_type_id")
     private WeaponType weaponType;

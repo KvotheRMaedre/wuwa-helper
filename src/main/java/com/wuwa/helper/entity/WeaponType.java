@@ -24,7 +24,7 @@ public class WeaponType {
     @UpdateTimestamp
     private Instant updatedTimestamp;
 
-    @OneToOne(mappedBy = "weaponType")
+    @OneToOne(mappedBy = "weaponType", cascade = CascadeType.ALL)
     private Resonator resonator;
 
     public WeaponType() {
