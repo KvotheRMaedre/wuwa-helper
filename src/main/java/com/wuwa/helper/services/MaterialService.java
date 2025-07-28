@@ -34,6 +34,7 @@ public class MaterialService {
         var material = new Material(
                 null,
                 materialDTO.description(),
+                materialDTO.setName(),
                 materialDTO.level(),
                 isCraftable,
                 materialDTO.materialType(),
@@ -53,6 +54,7 @@ public class MaterialService {
                 materialResponseDTO = new MaterialResponseDTO(
                         material.getId(),
                         material.getDescription(),
+                        material.getSetName(),
                         material.getLevel(),
                         material.getMaterialType(),
                         material.getCraftable(),
@@ -63,6 +65,7 @@ public class MaterialService {
                 materialResponseDTO = new MaterialResponseDTO(
                         material.getId(),
                         material.getDescription(),
+                        material.getSetName(),
                         material.getLevel(),
                         material.getMaterialType(),
                         material.getCraftable(),
@@ -88,6 +91,7 @@ public class MaterialService {
                 materialResponseDTO = new MaterialResponseDTO(
                         material.getId(),
                         material.getDescription(),
+                        material.getSetName(),
                         material.getLevel(),
                         material.getMaterialType(),
                         material.getCraftable(),
@@ -98,6 +102,7 @@ public class MaterialService {
                 materialResponseDTO = new MaterialResponseDTO(
                         material.getId(),
                         material.getDescription(),
+                        material.getSetName(),
                         material.getLevel(),
                         material.getMaterialType(),
                         material.getCraftable(),

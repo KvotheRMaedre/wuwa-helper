@@ -16,6 +16,9 @@ public class Material {
     @Column(name = "description")
     private String description;
 
+    @Column(name = "set_name")
+    private String setName;
+
     @Column(name = "level_material")
     private int level;
 
@@ -32,9 +35,10 @@ public class Material {
     public Material() {
     }
 
-    public Material(UUID id, String description, int level, Boolean isCraftable, String materialType, Material sourceMaterial) {
+    public Material(UUID id, String description, String setName, int level, Boolean isCraftable, String materialType, Material sourceMaterial) {
         this.id = id;
         this.description = description;
+        this.setName = setName;
         this.level = level;
         this.isCraftable = isCraftable;
         this.materialType = materialType;
@@ -55,6 +59,14 @@ public class Material {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public String getSetName() {
+        return setName;
+    }
+
+    public void setSetName(String setName) {
+        this.setName = this.setName;
     }
 
     public int getLevel() {
