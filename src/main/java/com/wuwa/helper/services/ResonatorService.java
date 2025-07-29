@@ -2,6 +2,7 @@ package com.wuwa.helper.services;
 
 import com.wuwa.helper.dto.ResonatorDTO;
 import com.wuwa.helper.entity.Resonator;
+import com.wuwa.helper.repository.MaterialRepository;
 import com.wuwa.helper.repository.ResonatorRepository;
 import com.wuwa.helper.repository.WeaponTypeRepository;
 import org.springframework.http.HttpStatus;
@@ -17,10 +18,12 @@ public class ResonatorService {
 
     private final ResonatorRepository resonatorRepository;
     private final WeaponTypeRepository weaponTypeRepository;
+    private final MaterialRepository materialRepository;
 
-    public ResonatorService(ResonatorRepository repository, WeaponTypeRepository weaponTypeRepository) {
+    public ResonatorService(ResonatorRepository repository, WeaponTypeRepository weaponTypeRepository, MaterialRepository materialRepository) {
         this.resonatorRepository = repository;
         this.weaponTypeRepository = weaponTypeRepository;
+        this.materialRepository = materialRepository;
     }
 
     public Resonator createResonator(ResonatorDTO resonatorDTO){
@@ -28,11 +31,28 @@ public class ResonatorService {
                 .findById(UUID.fromString(resonatorDTO.weaponTypeId()))
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
 
+        var collectable = materialRepository
+                .findById(UUID.fromString(resonatorDTO.collectableId()))
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
+
+        var bossMaterial = materialRepository
+                .findById(UUID.fromString(resonatorDTO.bossMaterialId()))
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
+
+        var weeklyMaterial = materialRepository
+                .findById(UUID.fromString(resonatorDTO.weeklyMaterialId()))
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
+
         var resonator = new Resonator(
                 null,
                 resonatorDTO.name(),
                 resonatorDTO.attribute(),
                 resonatorDTO.region(),
+                resonatorDTO.materialDropGroup(),
+                resonatorDTO.materialForgeryGroup(),
+                collectable,
+                bossMaterial,
+                weeklyMaterial,
                 weaponType
         );
 
