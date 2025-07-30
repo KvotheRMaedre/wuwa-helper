@@ -1,5 +1,6 @@
 package com.wuwa.helper.controller;
 
+import com.wuwa.helper.dto.CalcMaterialsResponseDTO;
 import com.wuwa.helper.dto.ResonatorDTO;
 import com.wuwa.helper.entity.Resonator;
 import com.wuwa.helper.services.ResonatorService;
@@ -54,5 +55,30 @@ public class ResonatorController {
         } catch (IllegalArgumentException exception) {
             return ResponseEntity.notFound().build();
         }
+    }
+
+    @GetMapping("/calc-total-materials")
+    public ResponseEntity<CalcMaterialsResponseDTO> calcMaterials(){
+        var calc = resonatorService.calcTotalMaterialsNeedRankAscension();
+        return ResponseEntity.ok(calc);
+    }
+
+    @GetMapping("/calc-needed-materials")
+    public ResponseEntity<CalcMaterialsResponseDTO> calcNeededMaterials(@RequestParam("qt_lvl_one_drop") int quantityLevelOneDrop,
+                                                                        @RequestParam("qt_lvl_two_drop") int quantityLevelTwoDrop,
+                                                                        @RequestParam("qt_lvl_three_drop") int quantityLevelThreeDrop,
+                                                                        @RequestParam("qt_lvl_four_drop") int quantityLevelFourDrop,
+                                                                        @RequestParam("qt_collectable") int quantityCollectable,
+                                                                        @RequestParam("qt_boss") int quantityBossMaterial,
+                                                                        @RequestParam("qt_shell_credits") int quantityShellCredits){
+
+        var calc = resonatorService.calcNeededMaterialsNeedRankAscension(quantityLevelOneDrop,
+                quantityLevelTwoDrop,
+                quantityLevelThreeDrop,
+                quantityLevelFourDrop,
+                quantityCollectable,
+                quantityBossMaterial,
+                quantityShellCredits);
+        return ResponseEntity.ok(calc);
     }
 }
